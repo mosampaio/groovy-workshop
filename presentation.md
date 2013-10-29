@@ -4,6 +4,8 @@ Introdução ao Groovy
 Marcos Sampaio
 @mosampaio
 
+!
+
 O que é?
 ------------------------------------
 
@@ -13,6 +15,8 @@ O que é?
 - Sintaxe quase idêntica a linguagem Java
 - Baixa curva de aprendizagem
 - Muito expressiva
+
+!
 
 História
 ------------------------------------
@@ -26,12 +30,13 @@ História
 - 07/2012 - Lançada a versão 2.0
 - XX/2014 - Previsão
 
+!
+
 Caracteristicas Técnicas
 ------------------------------------
 - Sintaxe "Java Friendly"
 - 100% Orientada a Objetos
-- Fortemente tipada
-- Tipagem dinâmica
+- Tipagem
 - Duck Typing
 - Sobrecarga de operadores
 - Closures
@@ -40,8 +45,9 @@ Caracteristicas Técnicas
 - Coleções
 - Metaprogramação
 
-Sintaxe "Java Friendly"
-------------------------------------
+!
+
+### Sintaxe "Java Friendly"
 
 Este é um código Java:
 
@@ -63,9 +69,30 @@ public class MainClass {
 }
 ```
 
-Este código acima também é um código groovy.
+!
 
-Mas podemos deixar ele um pouco mais "groovier". 
+Este código também é um código groovy.
+```groovy
+import java.util.Arrays;
+import java.util.List;
+
+public class MainClass {
+
+    public static void main(String[] args) {
+        List<String> list = Arrays.asList("Manga", "Açaí", "Maçã", "Limão");
+        
+        for (String fruta : list) {
+            if (fruta.length() == 5) {
+                System.out.println("Fruta: " + fruta);
+            }
+        }
+    }
+}
+```
+
+Mas podemos deixar ele um mais limpo usando alguns recursos do groovy.
+!
+
 
 Não é necessário ter uma classe com um método main. Groovy pode executar este código como um script.
 
@@ -80,6 +107,7 @@ for (String fruta : list) {
 	}
 }
 ```
+!
 
 Alguns pacotes bastantes usados já são importados por padrão. O java.util é um deles.
 
@@ -91,6 +119,7 @@ for (String fruta : list) {
 	}
 }
 ```
+!
 
 A variavél list não precisa ter um tipo declarado (duck typing). E existe literal pra ArrayList.
 
@@ -102,6 +131,7 @@ for (def fruta : list) {
 	}
 }
 ```
+!
 
 Em 99% dos casos, o ponto-e-vírgula é opcional, assim como os parênteses na invocação de métodos com parâmetros. E o System.out.println tem um atalho com a sintaxe mais amigável: println!
 
@@ -113,6 +143,7 @@ for (def fruta : list) {
 	}
 }
 ```
+!
 
 Não precisamos esperar até a JDK8 para utilizar closure. Podemos utiliza-las agora, com groovy.
 
@@ -125,6 +156,7 @@ list.each({
 	}
 })
 ```
+!
 
 Ops... Parênteses são opcionais.
 ```groovy
@@ -135,6 +167,7 @@ list.each{
 	}
 }
 ```
+!
 
 As Strings, em groovy, tem alguns superpoderes.
 ```groovy
@@ -145,17 +178,71 @@ list.each{
 	}
 }
 ```
+!
 
 E as coleções tem muitos métodos úteis, graças à introdução das closures.
 ```groovy
 def list = ["Manga", "Açaí", "Maçã", "Limão"]
-def filteredList = list.grep{it.size()==5}
+def filteredList = list.grep{
+  it.size()==5
+}
 filteredList.each{
   println "Fruta: $it"
 }
 ```
+!
 
-Que tal deixar o código um pouco mais "groovier"?
+Que tal deixar o código mais *groovier*?
 ```groovy
-["Manga", "Açaí", "Maçã", "Limão"].grep { it.size() == 5 }.each { println "Fruta: $it" }
+["Manga", "Açaí", "Maçã", "Limão"].grep{ it.size() == 5 }.each{ println "Fruta: $it" }
 ```
+!
+
+### 100% Orientada a Objetos
+
+No groovy, não se trabalha com tipo primitivos. Tudo é objeto. Inclusive os literais.
+
+```groovy
+3.power(2) //
+3**2
+5.class //java.lang.Integer
+1.toString() //1
+
+```
+!
+
+### Tipagem
+[Créditos deste tópico - Christopher Wong](http://chriswongdevblog.blogspot.com.br/2013/03/is-your-language-strongly-weakly.html)
+
+Há muita discussão sobre as tipagens das linguagens dinâmicas, como groovy e ruby. Muitos costumam chama-las erroneamente de linguagens de script ou que são fracamente tipadas. Então, vamos classificar melhor as linguagens.
+
+<table>
+    <tr>
+      <td>-</td>
+      <td>Fortemente tipada</td>
+      <td>Fracamente tipada</td>
+    </tr>
+    <tr>
+        <td>Estáticamente tipada</td>
+        <td>Java, C#</td>
+        <td>C</td>
+    </tr>
+     <tr>
+        <td>Dinâmicamente tipada</td>
+        <td>Groovy, Ruby</td>
+        <td>Javascript</td>
+    </tr>
+</table>
+!
+
+Java é obviamente uma linguagem uma linguagem tipada. Seus tipos são definidos explicitamente no código e não irá compilar se houver conflitos de tipos. Mesmo assim, é possível enganar o compilador, dando cast pra Object ou algum supetipo, mas a JVM não pode ser enganada. No momento que você tentar fazer algo estranho com o seu objeto, será lançada uma ClassCastException.
+
+Groovy é uma linguagem dinamicamente tipada. O compilador vai permitir que você escreva código como o trecho a seguir (se não habilitar a tipagem estática), dividindo um número por uma string:
+
+```groovy
+def a = 4.6
+def b = "A string"
+print a / b
+```
+
+Embora compile, a JVM sabe quais os tipos que você está tentando dividir, e é lançada uma exceção em tempo de execução. Em outras palavras, ambas as linguagens são fortemente tipadas: Você pode enganar o compilador, mas não pode enganar a JVM.
