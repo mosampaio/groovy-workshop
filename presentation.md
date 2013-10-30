@@ -32,7 +32,7 @@ História
 
 !
 
-Caracteristicas Técnicas
+Características/Fundamentos da Linguagem
 ------------------------------------
 - Sintaxe "Java Friendly"
 - 100% Orientada a Objetos
@@ -44,7 +44,6 @@ Caracteristicas Técnicas
 - Strings
 - Coleções
 - Metaprogramação
-
 !
 
 ### Sintaxe "Java Friendly"
@@ -245,6 +244,7 @@ public class MainClass {
         System.out.println(a/b);
     }
 }
+```
 Dará erro em tempo de compilação.
 !
 
@@ -258,10 +258,10 @@ public class MainClass {
         System.out.println(a/(Double)b);
     }
 }
+```
 Você pode enganar o compilador, mas não pode enganar a *runtime*.
 !
 
-```
 groovy
 ```groovy
 def a = 4.6
@@ -421,7 +421,7 @@ Algumas regras dos GroovyBeans
 - É possível criar ou sobrescrever os métodos de propriedades gets e sets.
 !
 
-Também existe várias anotações que ajudam a deixar o código mais limpo. 
+Existem várias anotações que ajudam a deixar o código mais limpo. 
 - @groovy.transform.EqualsAndHashCode
 - @groovy.transform.ToString
 - @groovy.transform.Synchronized
@@ -480,7 +480,7 @@ oi("Theo")
 ```
 !
 
-Também pode-se usar uma closure como parâmetro de um método
+Pode-se passar uma closure como parâmetro de um método
 ```groovy
 5.times({ println it })​ //lembrando que parenteses sao opcionais
 
@@ -488,7 +488,7 @@ Também pode-se usar uma closure como parâmetro de um método
 ```
 !
 
-As closures do groovy também suportam currying
+Suportam currying
 ```groovy
 def multiplicar = { a, b -> a * b }
 def dobro = multiplicar.curry(2)
@@ -503,7 +503,7 @@ println triplo(3)
 !
 
 ### Strings
-Em Groovy, podem ser do tipo String ou GString
+Podem ser do tipo String ou GString
 
 ```groovy
 def pessoa = "Theo"
@@ -512,7 +512,7 @@ def pessoa = "Theo"
 ```
 !
 
-Também é possível declarar a String em múltiplas linhas
+É possível declarar a String em múltiplas linhas
 ```groovy
 """select * 
 from table 
@@ -534,3 +534,47 @@ assert ["b", "b", "m", "p"].join() == "bbmp"
 assert "aa oa ds ao".grep{ it == ' '} == [' ', ' ', ' ']
 ```
 
+### Coleções
+
+#### Listas
+O groovy disponibiliza literais pra listas, além de vários métodos úteis
+
+```groovy
+assert [1,2].class == java.util.ArrayList.class
+assert [1,2,3] + 4 == [1,2,3,4]
+assert [1,2,3,4] - 4 == [1,2,3]
+assert [1,2,3].reverse() == [3,2,1]
+assert [1,2,3].intersect([2,3,4]) == [2,3]
+assert [1,2,3,1].count(1) == 2
+assert [1,2,3].min() == 1
+assert [1,2,3].max() == 3
+assert [1,2,3].sum() == 6
+assert [1,2,3,4].findAll{it % 2 == 0} == [2,4]
+assert [1, 3, 5] == ['a', 'few', 'words']*.size()​
+```
+
+#### Mapas
+Também há literal para mapas (coleção para pares de chave/valor)
+
+```groovy
+def map = ["chave 1": 1, "chave 2": 2]
+assert map."chave 1" == 1
+assert map["chave 1"] == 1
+assert map.get("chave 1") == 1
+
+assert ["1": 2, "3": 4].class == null //null?
+assert ["1": 2, "3": 4].getClass() == java.util.LinkedHashMap.class​
+```
+
+#### Ranges
+Permite criar lista de valores sequencias
+
+```groovy
+def range = 1..10
+
+range.each{ println it}
+
+range.step(2){ println it}
+
+assert range instanceof java.util.List
+```
