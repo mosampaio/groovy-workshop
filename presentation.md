@@ -43,6 +43,7 @@ Características/Fundamentos da Linguagem
 - Closures
 - Strings
 - Coleções
+- Outras coisas legais
 - Metaprogramação
 !
 
@@ -533,6 +534,7 @@ assert ["b", "b", "m", "p"].join() == "bbmp"
 
 assert "aa oa ds ao".grep{ it == ' '} == [' ', ' ', ' ']
 ```
+!
 
 ### Coleções
 
@@ -552,6 +554,7 @@ assert [1,2,3].sum() == 6
 assert [1,2,3,4].findAll{it % 2 == 0} == [2,4]
 assert [1, 3, 5] == ['a', 'few', 'words']*.size()​
 ```
+!
 
 #### Mapas
 Também há literal para mapas (coleção para pares de chave/valor)
@@ -565,6 +568,7 @@ assert map.get("chave 1") == 1
 assert ["1": 2, "3": 4].class == null //null?
 assert ["1": 2, "3": 4].getClass() == java.util.LinkedHashMap.class​
 ```
+!
 
 #### Ranges
 Permite criar lista de valores sequencias
@@ -577,4 +581,35 @@ range.each{ println it}
 range.step(2){ println it}
 
 assert range instanceof java.util.List
+```
+!
+
+## Outras coisas legais
+
+### Exceções
+Todas as exceções são tratadas como exceções não checadas.
+```groovy
+def date = ​new java.text.SimpleDateFormat("dd/MM/yyyy").parse("10/10/2010")​
+println date
+```
+!
+
+### Navegação segura
+```groovy
+class Pessoa {
+  def pai
+}
+def p = new Pessoa()
+assert p?.pai?.pai == null
+//p.pai.pai lançaria um NullPointerException
+
+```
+
+### Default Parameters
+```groovy
+def ola(p = "Mundo") {
+  println "Olá $p"
+}
+ola()
+ola("Pessoas")
 ```
