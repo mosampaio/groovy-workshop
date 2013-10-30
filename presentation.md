@@ -1,4 +1,4 @@
-Introdução ao Groovy
+Introdução ao Groovy - Com exemplos
 ================
 
 Marcos Sampaio
@@ -12,9 +12,9 @@ O que é?
 - Linguagem Dinâmica
 - Inspirada em Ruby, Python, Perl e Smalltalk
 - Compilada dinamicamente para bytecode
-- Sintaxe quase idêntica a linguagem Java
-- Baixa curva de aprendizagem
-- Muito expressiva
+- Sintaxe bem parecida com Java
+- Baixa curva de aprendizagem para devs Java
+- Considerada bastante expressiva
 
 !
 
@@ -455,10 +455,10 @@ c1.nome = "Arthur"
 
 ### Closures
 Definição: É um bloco de código ou um ponteiro de método A Groovy Closure is like a "code block" or a method pointer.
-PS: Martin Fowler dá uma explicação explicação em um [artigo]((http://martinfowler.com/bliki/Lambda.html)).
+PS: Martin Fowler dá uma explicação mais detalhada neste [artigo]((http://martinfowler.com/bliki/Lambda.html)).
 !
 
-Exemplo Simples
+Exemplo simples
 ```groovy
 def clos = { println "bbmp!" }
 clos()
@@ -466,17 +466,42 @@ clos.call()
 ```
 !
 
-Exemplo com Parâmetros
+Exemplo com parâmetros
 ```groovy
 def soma = { a, b -> print a+b }
-soma( 5, 7 )
+soma(1, 2)
 ```
 !
 
-Se houver apenas um Parâmetro, pode-se usar a variável *it* sem o ->
+Se houver apenas um parâmetro, pode-se usar a variável *it* sem o ->
 ```groovy
 def oi = { print "oi $it !" }
 oi("Theo")
 ```
 !
 
+Também pode-se usar uma closure como parâmetro de um método
+```groovy
+5.times({ println it })​ //lembrando que parenteses sao opcionais
+
+[1,2,3].each { print it } //agora sem parenteses
+
+'''select * 
+from table 
+where 1=1'''
+.eachLine{ println it }
+```
+!
+
+As closures do groovy também suportam currying
+```groovy
+def multiplicar = { a, b -> a * b }
+def dobro = multiplicar.curry(2)
+def triplo = multiplicar.curry(3)
+
+println multiplicar(5, 2)
+println multiplicar(5, 3)
+
+println dobro(5)
+println triplo(3)
+```
