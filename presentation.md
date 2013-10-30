@@ -285,3 +285,21 @@ var x = 4.6 / "A string"
 Irá efetuar a operação. Não dará erro.
 !
 
+### Duck Typing
+
+Em programação com linguagens orientadas a objetos, duck typing é um estilo de tipagem dinâmica na qual o conjunto atual de métodos e propriedades de um objeto determinam a semântica válida, ao invés de sua herança ou da implementação de uma interface específica. O nome do conceito refere-se ao teste do pato, atribuída a James Whitcomb Riley, que pode ser formulada como se segue:
+Quando eu vejo um pássaro que anda como um pato, nada como um pato e grasna como um pato, eu o chamo de pato. [Wikipedia](http://pt.wikipedia.org/wiki/Duck_typing)
+!
+
+```groovy
+def log(obj) {
+  println "Tamanho do objeto: " + obj.size()
+}
+
+log("Nice stuff")
+log([1,2,3,4])
+log(["key": "value", "key2": "value2", "key3": "value4"])
+log("abcabdabeabf" =~ /ab[d|f]/​)​
+```
+
+### Sobrecarga de operadores
