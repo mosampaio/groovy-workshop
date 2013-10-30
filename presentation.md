@@ -358,13 +358,8 @@ println ​d1 + d2​
 !
 
 ### GroovyBeans
-São JavaBeans, mas com a sintaxe mais simplificada. E ela segue algumas regras.
-- Se não for declarado um modificador de acesso para classe, ela será considerada pública.
-- Se for declarado um modificador de acesso para um campo, será criado um campo com este modificador.
-- Se não for declarado um modificador de acesso para um campo, ele será criado como privado e será criado métodos de propriedades (gets e sets). Caso tenha o 'final', será criado apenas o método get.
-- É possível criar ou sobrescrever os métodos de propriedades gets e sets.
+São JavaBeans, mas com a sintaxe mais simplificada.
 
-!
 Exemplo de GroovyBean
 ```groovy
 class Cliente {
@@ -419,6 +414,12 @@ c.setNascimento(new Date());
 System.out.println("Olá " + c.getNome());
 ```
 !
+Algumas regras dos GroovyBeans
+- Se não for declarado um modificador de acesso para classe, ela será considerada pública.
+- Se for declarado um modificador de acesso para um campo, será criado um campo com este modificador.
+- Se não for declarado um modificador de acesso para um campo, ele será criado como privado e será criado métodos de propriedades (gets e sets). Caso tenha o 'final', será criado apenas o método get.
+- É possível criar ou sobrescrever os métodos de propriedades gets e sets.
+!
 
 Também existe várias anotações que ajudam a deixar o código mais limpo. 
 - @groovy.transform.EqualsAndHashCode
@@ -427,7 +428,7 @@ Também existe várias anotações que ajudam a deixar o código mais limpo.
 - @groovy.transform.Immutable
 - @groovy.beans.Bindable
 - @groovy.lang.Singleton
-- etc..
+Entre outras.
 !
 
 Exemplo com anotações.
@@ -450,4 +451,32 @@ println "teste equals ${c1 == c2}"
 c1.addPropertyChangeListener({ println "teste event: $it.source.nome"} as java.beans.PropertyChangeListener)
 c1.nome = "Arthur"
 ```
+!
+
+### Closures
+Definição: É um bloco de código ou um ponteiro de método A Groovy Closure is like a "code block" or a method pointer.
+PS: Martin Fowler dá uma explicação explicação em um [artigo]((http://martinfowler.com/bliki/Lambda.html)).
+!
+
+Exemplo Simples
+```groovy
+def clos = { println "bbmp!" }
+clos()
+clos.call()
+```
+!
+
+Exemplo com Parâmetros
+```groovy
+def soma = { a, b -> print a+b }
+soma( 5, 7 )
+```
+!
+
+Se houver apenas um Parâmetro, pode-se usar a variável *it* sem o ->
+```groovy
+def oi = { print "oi $it !" }
+oi("Theo")
+```
+!
 
