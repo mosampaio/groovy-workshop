@@ -39,7 +39,7 @@ Caracteristicas Técnicas
 - Tipagem
 - Duck Typing
 - Sobrecarga de Operadores
-- JavaBeans
+- GroovyBeans
 - Closures
 - Strings
 - Coleções
@@ -357,4 +357,97 @@ println ​d1 + d2​
 ```
 !
 
-### JavaBeans
+### GroovyBeans
+São JavaBeans, mas com a sintaxe mais simplificada. E ela segue algumas regras.
+- Se não for declarado um modificador de acesso para classe, ela será considerada pública.
+- Se for declarado um modificador de acesso para um campo, será criado um campo com este modificador.
+- Se não for declarado um modificador de acesso para um campo, ele será criado como privado e será criado métodos de propriedades (gets e sets). Caso tenha o 'final', será criado apenas o método get.
+- É possível criar ou sobrescrever os métodos de propriedades gets e sets.
+
+!
+Exemplo de GroovyBean
+```groovy
+class Cliente {
+  final Long id = 1
+  String nome
+  Date nascimento
+  
+  String getNome(){
+    nome + "!"
+  }
+}
+
+def c = new Cliente(nome:"Arthur", nascimento: new Date())
+println "Olá " + c.nome
+```
+!
+
+Código Java equivalente
+```java
+import java.util.Date;
+
+public Cliente {
+  private Long id = 1;
+  private String nome;
+  private Date nascimento;
+  
+  public String getId(){
+    return id;
+  }
+  
+  public void setNome(String nome){
+    this.nome = nome;
+  }
+  
+  public String getNome(){
+    return nome + "!";
+  }
+  
+  public void setNascimento(Date nascimento){
+    this.nascimento = nascimento;
+  }
+  
+  public void getNascimento(){
+    return nascimento;
+  }
+  
+}
+//dentro de um método main...
+Cliente c = new Cliente();
+c.setNome("Arthur");
+c.setNascimento(new Date());
+System.out.println("Olá " + c.getNome());
+```
+!
+
+Também existe várias anotações que ajudam a deixar o código mais limpo. 
+- @groovy.transform.EqualsAndHashCode
+- @groovy.transform.ToString
+- @groovy.transform.Synchronized
+- @groovy.transform.Immutable
+- @groovy.beans.Bindable
+- @groovy.lang.Singleton
+- etc..
+!
+
+Exemplo com anotações.
+
+```groovy
+import groovy.transform.EqualsAndHashCode
+import groovy.beans.Bindable
+
+@EqualsAndHashCode(includes="id")
+@Bindable
+class Cliente {
+  Long id
+  String nome
+}
+//equals test
+def c1 = new Cliente(id:1, nome:"Theo c1")
+def c2 = new Cliente(id:1, nome:"Theo c2")
+println "teste equals ${c1 == c2}"
+//bindable test
+c1.addPropertyChangeListener({ println "teste event: $it.source.nome"} as java.beans.PropertyChangeListener)
+c1.nome = "Arthur"
+```
+
