@@ -485,11 +485,6 @@ Também pode-se usar uma closure como parâmetro de um método
 5.times({ println it })​ //lembrando que parenteses sao opcionais
 
 [1,2,3].each { print it } //agora sem parenteses
-
-'''select * 
-from table 
-where 1=1'''
-.eachLine{ println it }
 ```
 !
 
@@ -505,3 +500,37 @@ println multiplicar(5, 3)
 println dobro(5)
 println triplo(3)
 ```
+!
+
+### Strings
+Em Groovy, podem ser do tipo String ou GString
+
+```groovy
+def pessoa = "Theo"
+'Ola $pessoa' //string -> imprime ola $pessoa
+"Ola $pessoa" //gstring -> imprime ola Theo
+```
+!
+
+Também é possível declarar a String em múltiplas linhas
+```groovy
+"""select * 
+from table 
+where 1=1"""
+.eachLine{ println it }
+```
+!
+
+E manipular strings em groovy é bem mais atraente do que em Java
+```groovy
+assert "marcos" - "os" + "io" == "marcio"
+
+assert "casa".toList​​​​​​​() == ['c', 'a', 's', 'a']​​​​​​
+
+assert "bola".reverse() == "alob"
+
+assert ["b", "b", "m", "p"].join() == "bbmp"
+
+assert "aa oa ds ao".grep{ it == ' '} == [' ', ' ', ' ']
+```
+
