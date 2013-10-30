@@ -235,14 +235,53 @@ Há muita discussão sobre as tipagens das linguagens dinâmicas, como groovy e 
 </table>
 !
 
-Java é obviamente uma linguagem uma linguagem tipada. Seus tipos são definidos explicitamente no código e não irá compilar se houver conflitos de tipos. Mesmo assim, é possível enganar o compilador, dando cast pra Object ou algum supetipo, mas a JVM não pode ser enganada. No momento que você tentar fazer algo estranho com o seu objeto, será lançada uma ClassCastException.
+java ex. 1
+```java
+public class MainClass {
 
-Groovy é uma linguagem dinamicamente tipada. O compilador vai permitir que você escreva código como o trecho a seguir (se não habilitar a tipagem estática), dividindo um número por uma string:
+    public static void main(String[] args) {
+        Double a = 4.6;
+        String b = "A string";
+        System.out.println(a/b);
+    }
+}
+Dará erro em tempo de compilação.
+!
 
+java ex. 2
+```java
+public class MainClass {
+
+    public static void main(String[] args) {
+        Double a = 4.6;
+        Object b = "A string";
+        System.out.println(a/(Double)b);
+    }
+}
+Você pode enganar o compilador, mas não pode enganar a *runtime*.
+!
+
+```
+groovy
 ```groovy
 def a = 4.6
 def b = "A string"
 print a / b
 ```
+Lançará uma exception em tempo de execução.
+!
 
-Embora compile, a JVM sabe quais os tipos que você está tentando dividir, e é lançada uma exceção em tempo de execução. Em outras palavras, ambas as linguagens são fortemente tipadas: Você pode enganar o compilador, mas não pode enganar a JVM.
+C
+```c
+printf("%d\n", (4.6 / *((int*) "A string")));
+```
+Irá efetuar a operação.
+!
+
+Javascript
+```javascript
+var x = 4.6 / "A string"
+```
+Irá efetuar a operação. Não dará erro.
+!
+
