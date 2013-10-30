@@ -38,9 +38,9 @@ Caracteristicas Técnicas
 - 100% Orientada a Objetos
 - Tipagem
 - Duck Typing
-- Sobrecarga de operadores
+- Sobrecarga de Operadores
+- JavaBeans
 - Closures
-- Javabeans
 - Strings
 - Coleções
 - Metaprogramação
@@ -302,4 +302,59 @@ log(["key": "value", "key2": "value2", "key3": "value4"])
 log("abcabdabeabf" =~ /ab[d|f]/​)​
 ```
 
-### Sobrecarga de operadores
+!
+### Sobrecarga de Operadores
+
+<table>
+  <thead>
+    <tr>
+      <th>Operação</th>
+      <th>Método</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>a + b</td>
+      <td>a.plus(b)</td>
+    </tr>
+    <tr>
+      <td>a - b</td>
+      <td>a.minus(b)</td>
+    </tr>
+    <tr>
+      <td>a * b</td>
+      <td>a.multiply(b)</td>
+    </tr>
+    <tr>
+      <td>a == b</td>
+      <td>a.equals(b)</td>
+    </tr>
+    <tr>
+      <td>a > b</td>
+      <td>a.compareTo(b) > 0</td>
+    </tr>
+  </tbody>
+</table>
+!
+```groovy
+def one = BigDecimal.ONE
+def ten = new BigDecimal("10")
+print ​one + ten​
+```
+!
+
+```groovy
+class Dinheiro {
+  def valor
+  def plus(d) {
+    valor += d.valor
+  }
+  String toString(){ valor }
+}
+def d1 = new Dinheiro(valor: 99.5)
+def d2 = new Dinheiro(valor: 0.5)
+println ​d1 + d2​
+```
+!
+
+### JavaBeans
