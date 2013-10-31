@@ -6,8 +6,7 @@ Marcos Sampaio
 
 !
 
-O que é?
-------------------------------------
+## O que é?
 
 - Linguagem Dinâmica
 - Inspirada em Ruby, Python, Perl e Smalltalk
@@ -18,8 +17,8 @@ O que é?
 
 !
 
-História
-------------------------------------
+## História
+
 - 2003 - Criada por James Strachan
 - 01/2007 - Lançada a versão 1.0
 - 12/2007 - Lançada a versão 1.5
@@ -28,12 +27,12 @@ História
 - 11/2008 - Grails adquirido pela Springsource
 - 08/2009 - Springsource foi comparada pela VMWare
 - 07/2012 - Lançada a versão 2.0
-- XX/2014 - Previsão
+- XX/2014 - Previsão da versão 3.0
 
 !
 
-Características/Fundamentos da Linguagem
-------------------------------------
+## Características da Linguagem
+
 - Sintaxe "Java Friendly"
 - 100% Orientada a Objetos
 - Tipagem
@@ -44,7 +43,6 @@ Características/Fundamentos da Linguagem
 - Strings
 - Coleções
 - Outras coisas legais
-- Metaprogramação
 !
 
 ### Sintaxe "Java Friendly"
@@ -584,9 +582,9 @@ assert range instanceof java.util.List
 ```
 !
 
-## Outras coisas legais
+### Outras coisas legais
 
-### Exceções
+#### Exceções
 Todas as exceções são tratadas como exceções não checadas.
 ```groovy
 def date = ​new java.text.SimpleDateFormat("dd/MM/yyyy").parse("10/10/2010")​
@@ -594,7 +592,7 @@ println date
 ```
 !
 
-### Navegação segura
+#### Navegação segura
 ```groovy
 class Pessoa {
   def pai
@@ -604,12 +602,42 @@ assert p?.pai?.pai == null
 //p.pai.pai lançaria um NullPointerException
 
 ```
+!
 
-### Default Parameters
+#### Default Parameters
 ```groovy
 def ola(p = "Mundo") {
   println "Olá $p"
 }
 ola()
 ola("Pessoas")
+```
+!
+
+#### Metaprogramação
+```groovy
+class Pessoa {
+  def nome
+}
+
+Pessoa.metaClass.printNome{ println nome }
+def p = new Pessoa(nome:"Arthur")
+p.printNome​()​
+```
+!
+
+```groovy
+class Pessoa {
+  def nome
+}
+
+Pessoa.metaClass.printNome{ println nome }
+def p = new Pessoa(nome:"Arthur")
+p.printNome()
+
+p.metaClass.hello{ println "Hello $nome!" }
+p.hello()
+
+p.metaClass.idade = 3
+println p.idade​
 ```
