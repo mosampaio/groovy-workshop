@@ -2,7 +2,7 @@ Introdução a Groovy - Com exemplos
 ================
 
 Marcos Sampaio
-@mosampaio
+@mosampaio - mosampaio.com.br
 
 !
 
