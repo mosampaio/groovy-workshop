@@ -1,5 +1,7 @@
-Introdução a Groovy com exemplos
-================
+#Groovy
+
+by [Marcos Sampaio](http://github.com/mosampaio) - [@mosampaio](http://twitter.com/mosampaio)
+
 
 ```groovy
 def autor = "Marcos Sampaio"
@@ -10,43 +12,54 @@ def apresentacao = "mosampaio.github.io/groovy-workshop"
 ```
 
 
+
 ## O que é?
 
-- Linguagem Dinâmica
-- Inspirada em Ruby, Python, Perl e Smalltalk
-- Compilada dinamicamente para bytecode
-- Sintaxe bem parecida com Java
-- Baixa curva de aprendizagem para devs Java
-- Considerada bastante expressiva
+
++ Linguagem Dinâmica
++ Inspirada em Ruby, Python, Perl e Smalltalk
++ Compilada dinamicamente para bytecode
++ Sintaxe bem parecida com Java
++ Baixa curva de aprendizagem para devs Java
++ Considerada bastante expressiva
+
+
++ Roda na JVM
++ Interoperabilidade com Java
++ Suporte de IDEs (eclipse, netbeans e intellij idea)
++ Comunidade ativa
++ [18º no ranking de linguagem mais popular](http://www.infoworld.com/t/java-programming/groovy-breaks-top-20-list-of-programming-languages-228677)
++ 2ª linguagem mais popular da JVM
 
 
 
 ## História
 
-- 2003 - Criada por James Strachan
-- 01/2007 - Lançada a versão 1.0
-- 12/2007 - Lançada a versão 1.5
-- 2007 - 1º lugar JAX 2007 innovation award
-- 2008 - 2º lugar JAX 2008 innovation award (grails) 
-- 11/2008 - Grails adquirido pela Springsource
-- 08/2009 - Springsource foi comparada pela VMWare
-- 07/2012 - Lançada a versão 2.0
-- XX/2014 - Previsão da versão 3.0
++ 2003 - Criada por James Strachan
++ 01/2007 - Lançada a versão 1.0
++ 12/2007 - Lançada a versão 1.5
++ 2007 - 1º lugar JAX 2007 innovation award
++ 2008 - 2º lugar JAX 2008 innovation award (grails) 
++ 11/2008 - Grails adquirido pela Springsource
++ 08/2009 - Springsource foi comparada pela VMWare
++ 07/2012 - Lançada a versão 2.0
++ XX/2014 - Previsão da versão 3.0
 
 
 
-## Características da Linguagem
+## Características
 
-- Sintaxe "Java Friendly"
-- 100% Orientada a Objetos
-- Tipagem
-- Duck Typing
-- Operadores
-- GroovyBeans
-- Closures
-- Strings
-- Coleções
-- Outras coisas legais
++ Sintaxe "Java Friendly"
++ 100% Orientada a Objetos
++ Tipagem 
++ Operadores
++ GroovyBeans
++ Closures
++ Strings
++ Coleções
++ Metaprogramação
++ Testes
++ Outras coisas legais
 
 
 
@@ -274,8 +287,7 @@ var x = 4.6 / "A string"
 <p class="fragment">Irá efetuar a operação. Não dará erro.</p>
 
 
-
-### Duck Typing
+## Duck Typing
 
 
 Em programação com linguagens orientadas a objetos, duck typing é um estilo de tipagem dinâmica na qual o conjunto atual de métodos e propriedades de um objeto determinam a semântica válida, ao invés de sua herança ou da implementação de uma interface específica.
@@ -295,6 +307,7 @@ log([1,2,3,4])
 log(["key": "value", "key2": "value2", "key3": "value4"])
 log("abcabdabeabf" =~ /ab[d|f]/)
 ```
+<p class="fragment">Não importa o tipo. Basta implementar o método size.</p>
 
 
 
@@ -361,6 +374,14 @@ print one + ten
 ### GroovyBeans
 São JavaBeans, mas com a sintaxe mais simplificada.
 
+
+### Algumas regras
++ Se a classe não possuir um modificador de acesso declarado, ela será considerada pública.
++ Se o campo não possuir um modificador de acesso declaradoo, ele será criado como privado e será criado métodos de propriedades (gets e sets). 
+++ Caso tenha o 'final', será criado apenas o método get.
++ É possível criar ou sobrescrever os métodos de propriedades gets e sets.
+
+
 Exemplo de GroovyBean
 ```groovy
 class Cliente {
@@ -416,22 +437,13 @@ System.out.println("Olá " + c.getNome());
 ```
 
 
-Algumas regras dos GroovyBeans
-- Se não for declarado um modificador de acesso para classe, ela será considerada pública.
-- Se for declarado um modificador de acesso para um campo, será criado um campo com este modificador.
-- Se não for declarado um modificador de acesso para um campo, ele será criado como privado e será criado métodos de propriedades (gets e sets). Caso tenha o 'final', será criado apenas o método get.
-- É possível criar ou sobrescrever os métodos de propriedades gets e sets.
-
-
-
-Existem várias anotações que ajudam a deixar o código mais limpo. 
-- @groovy.transform.EqualsAndHashCode
-- @groovy.transform.ToString
-- @groovy.transform.Synchronized
-- @groovy.transform.Immutable
-- @groovy.beans.Bindable
-- @groovy.lang.Singleton
-Entre outras.
+### Algumas anotações
++ @groovy.transform.EqualsAndHashCode
++ @groovy.transform.ToString
++ @groovy.transform.Synchronized
++ @groovy.transform.Immutable
++ @groovy.beans.Bindable
++ @groovy.lang.Singleton
 
 
 Exemplo com anotações.
@@ -539,7 +551,9 @@ assert "aa oa ds ao".grep{ it == ' '} == [' ', ' ', ' ']
 ```
 
 
+
 ### Coleções
+
 
 #### Listas
 O groovy disponibiliza literais pra listas, além de vários métodos úteis
@@ -588,7 +602,93 @@ assert range instanceof java.util.List
 
 
 
+### Metaprogramação
+
+
+Adicionando metodos
+```groovy
+class Pessoa {
+  def nome
+}
+
+Pessoa.metaClass.printNome{ println nome }
+def p = new Pessoa(nome:"Arthur")
+p.printNome()
+```
+
+
+Adicionando propriedades
+```groovy
+class Pessoa {
+  def nome
+}
+
+Pessoa.metaClass.printNome{ println nome }
+def p = new Pessoa(nome:"Arthur")
+p.printNome()
+
+p.metaClass.hello{ println "Hello $nome!" }
+p.hello()
+
+p.metaClass.idade = 3
+println p.idade
+```
+
+
+Alterando a classe String
+```groovy
+String.metaClass.toUpperCase = { delegate.toLowerCase() }  
+assert "hello world" == "Hello World".toUpperCase()
+```
+
+
+
+###Testes
+
+
+jUnit
+```groovy
+import org.junit.Test
+import static org.junit.Assert.assertEquals
+
+class ArithmeticTest {
+    @Test
+    void additionIsWorking() {
+        assertEquals 4, 2+2
+    }
+
+    @Test(expected=ArithmeticException)
+    void divideByZero() {
+        println 1/0
+    }
+}
+```
+
+
+[easyB](http://easyb.org/)
+```groovy
+given "an invalid zip code", {
+  invalidzipcode = "221o1"
+}
+
+and "given the zipcodevalidator is initialized", {
+  zipvalidate = new ZipCodeValidator()
+}
+
+when "validate is invoked with the invalid zip code", {
+  value = zipvalidate.validate(invalidzipcode)
+}
+
+then "the validator instance should return false", {
+  value.shouldBe false
+}
+  
+```
+
+
+
 ### Outras coisas legais
+
 
 #### Exceções
 Todas as exceções são tratadas como exceções não checadas.
@@ -605,9 +705,9 @@ class Pessoa {
 }
 def p = new Pessoa()
 assert p?.pai?.pai == null
-//p.pai.pai lançaria um NullPointerException
 
 ```
+note: p.pai.pai lançaria um NullPointerException
 
 
 #### Default Parameters
@@ -620,38 +720,18 @@ ola("Pessoas")
 ```
 
 
-#### Metaprogramação
-```groovy
-class Pessoa {
-  def nome
-}
+##Bibliotecas e Frameworks
 
-Pessoa.metaClass.printNome{ println nome }
-def p = new Pessoa(nome:"Arthur")
-p.printNome()
-```
-
-
-```groovy
-class Pessoa {
-  def nome
-}
-
-Pessoa.metaClass.printNome{ println nome }
-def p = new Pessoa(nome:"Arthur")
-p.printNome()
-
-p.metaClass.hello{ println "Hello $nome!" }
-p.hello()
-
-p.metaClass.idade = 3
-println p.idade​
-```
++ [Gradle](http://www.gradle.org) - Concorrente do Maven
++ [Ratpack](https://github.com/bleedingwolf/Ratpack) - Inspirado no Sinatra
++ [Grails](http://grails.org) - Inspirado no Rails
++ [Gaelyk](http://gaelyk.appspot.com) - Framework pro Google App Engine
++ [Vert.x](http://vertx.io/) - Inspirado no Node.js
 
 
 
 ## Referências
 
-[Is your language strongly or weakly - Christopher Wong](http://chriswongdevblog.blogspot.com.br/2013/03/is-your-language-strongly-weakly.html)
-[Lambda]((http://martinfowler.com/bliki/Lambda.html)).
-[Wikipedia](http://pt.wikipedia.org/wiki/Duck_typing)
++ [Is your language strongly or weakly - Christopher Wong](http://chriswongdevblog.blogspot.com.br/2013/03/is-your-language-strongly-weakly.html)
++ [Lambda]((http://martinfowler.com/bliki/Lambda.html)
++ [Wikipedia](http://pt.wikipedia.org/wiki/Duck_typing)
