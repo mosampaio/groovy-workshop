@@ -1,9 +1,13 @@
 Introdução a Groovy com exemplos
 ================
 
-Marcos Sampaio
-@mosampaio - mosampaio.com.br
-
+```groovy
+def autor = "Marcos Sampaio"
+def email = "mosampaio@gmail.com"
+def twitter = "@mosampaio"
+def github = "github.com/mosampaio/groovy-workshop"
+def apresentacao = "mosampaio.github.io/groovy-workshop"
+```
 
 
 ## O que é?
