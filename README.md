@@ -41,7 +41,7 @@ def apresentacao = "mosampaio.github.io/groovy-workshop"
 - 100% Orientada a Objetos
 - Tipagem
 - Duck Typing
-- Sobrecarga de Operadores
+- Operadores
 - GroovyBeans
 - Closures
 - Strings
@@ -52,7 +52,8 @@ def apresentacao = "mosampaio.github.io/groovy-workshop"
 
 ### Sintaxe "Java Friendly"
 
-Este é um código Java:
+
+Este é um código Java.
 
 ```java
 import java.util.Arrays;
@@ -71,33 +72,9 @@ public class MainClass {
     }
 }
 ```
+<p class="fragment">Este código também é um código groovy.</p>
+<p class="fragment">Mas não é necessário ter uma classe com um método main.</p>
 
-
-
-Este código também é um código groovy.
-```groovy
-import java.util.Arrays;
-import java.util.List;
-
-public class MainClass {
-
-    public static void main(String[] args) {
-        List<String> list = Arrays.asList("Manga", "Açaí", "Maçã", "Limão");
-        
-        for (String fruta : list) {
-            if (fruta.length() == 5) {
-                System.out.println("Fruta: " + fruta);
-            }
-        }
-    }
-}
-```
-
-Mas podemos deixar ele um mais limpo usando alguns recursos do groovy.
-
-
-
-Não é necessário ter uma classe com um método main. Groovy pode executar este código como um script.
 
 ```groovy
 import java.util.Arrays;
@@ -110,10 +87,9 @@ for (String fruta : list) {
 	}
 }
 ```
+<p class="fragment">Alguns pacotes bastante usados já são importados por padrão.</p>
+<p class="fragment">O *java.util* é um deles.</p>
 
-
-
-Alguns pacotes bastantes usados já são importados por padrão. O java.util é um deles.
 
 ```groovy
 List<String> list = Arrays.asList("Manga", "Açaí", "Maçã", "Limão");
@@ -123,24 +99,21 @@ for (String fruta : list) {
 	}
 }
 ```
+<p class="fragment">A variável *list* não precisa ter um tipo declarado.</p>
+<p class="fragment">Existe literal pra ArrayList.</p>
 
-
-
-A variavél list não precisa ter um tipo declarado (duck typing). E existe literal pra ArrayList.
 
 ```groovy
-def list = ["Manga", "Açaí", "Maçã", "Limão"]
+def list = ["Manga", "Açaí", "Maçã", "Limão"];
 for (def fruta : list) {
    	if (fruta.length() == 5) {
-       	System.out.println("Fruta: " + fruta)
+       	System.out.println("Fruta: " + fruta);
 	}
 }
 ```
-
-
-
-Em 99% dos casos, o ponto-e-vírgula é opcional, assim como os parênteses na invocação de métodos com parâmetros. E o System.out.println tem um atalho com a sintaxe mais amigável: println.
-
+<p class="fragment">Ponto-e-vírgula opcional.</p>
+<p class="fragment">Parênteses opcionais (na invocação de métodos com parâmetros).</p> 
+<p class="fragment">E o *System.out.println* tem um atalho com a sintaxe mais amigável: *println*.</p> 
 
 
 ```groovy
@@ -151,10 +124,7 @@ for (def fruta : list) {
 	}
 }
 ```
-
-
-
-Não precisamos esperar até a JDK8 para utilizar closure. Podemos utiliza-las agora, com groovy.
+<p class="fragment">Não precisamos esperar até a JDK8 para utilizar closure. Podemos utiliza-las agora, com groovy.</p>
 
 
 ```groovy
@@ -165,10 +135,9 @@ list.each({
 	}
 })
 ```
+<p class="fragment">Ops... Parênteses são opcionais.</p>
 
 
-
-Ops... Parênteses são opcionais.
 ```groovy
 def list = ["Manga", "Açaí", "Maçã", "Limão"]
 list.each{
@@ -177,10 +146,9 @@ list.each{
 	}
 }
 ```
+<p class="fragment">Strings inteligentes.</p>
 
 
-
-As Strings, em groovy, tem alguns superpoderes.
 ```groovy
 def list = ["Manga", "Açaí", "Maçã", "Limão"]
 list.each{
@@ -189,10 +157,9 @@ list.each{
 	}
 }
 ```
+<p class="fragment">E as coleções tem muitos métodos úteis, graças às closures.</p>
 
 
-
-E as coleções tem muitos métodos úteis, graças à introdução das closures.
 ```groovy
 def list = ["Manga", "Açaí", "Maçã", "Limão"]
 def filteredList = list.grep{
@@ -202,10 +169,9 @@ filteredList.each{
   println "Fruta: $it"
 }
 ```
+<p class="fragment">Que tal deixar o código mais *groovier*?</p>
 
 
-
-Que tal deixar o código mais *groovier*?
 ```groovy
 ["Manga", "Açaí", "Maçã", "Limão"].grep{ it.size() == 5 }.each{ println "Fruta: $it" }
 ```
@@ -214,11 +180,11 @@ Que tal deixar o código mais *groovier*?
 
 ### 100% Orientada a Objetos
 
-No groovy, não se trabalha com tipo primitivos. Tudo é objeto. Inclusive os literais.
+
+No groovy, não existe tipos primitivos. Tudo é objeto.
 
 ```groovy
-3.power(2) //
-3**2
+3.power(2) //9
 5.class //java.lang.Integer
 1.toString() //1
 
@@ -227,31 +193,35 @@ No groovy, não se trabalha com tipo primitivos. Tudo é objeto. Inclusive os li
 
 
 ### Tipagem
-[Créditos deste tópico - Christopher Wong](http://chriswongdevblog.blogspot.com.br/2013/03/is-your-language-strongly-weakly.html)
+
 
 Há muita discussão sobre as tipagens das linguagens dinâmicas, como groovy e ruby. Muitos costumam chama-las erroneamente de linguagens de script ou que são fracamente tipadas. Então, vamos classificar melhor as linguagens.
 
+
 <table>
-    <tr>
-      <td>-</td>
-      <td>Fortemente tipada</td>
-      <td>Fracamente tipada</td>
-    </tr>
-    <tr>
-        <td>Estáticamente tipada</td>
-        <td>Java, C#</td>
-        <td>C</td>
-    </tr>
-     <tr>
-        <td>Dinâmicamente tipada</td>
-        <td>Groovy, Ruby</td>
-        <td>Javascript</td>
-    </tr>
+    <thead>
+        <tr>
+          <th>-</th>
+          <th>Fortemente tipada</th>
+          <th>Fracamente tipada</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Estáticamente tipada</td>
+            <td>Java, C#</td>
+            <td>C</td>
+        </tr>
+        <tr>
+            <td>Dinâmicamente tipada</td>
+            <td>Groovy, Ruby</td>
+            <td>Javascript</td>
+        </tr>
+    </tbody>
 </table>
 
 
-
-java ex. 1
+Java
 ```java
 public class MainClass {
 
@@ -262,11 +232,10 @@ public class MainClass {
     }
 }
 ```
-Dará erro em tempo de compilação.
+<p class="fragment">Dará erro em tempo de compilação.</p>
 
 
-
-java ex. 2
+Java
 ```java
 public class MainClass {
 
@@ -277,8 +246,8 @@ public class MainClass {
     }
 }
 ```
-Você pode enganar o compilador, mas não pode enganar a *runtime*.
-
+<p class="fragment">Erro em tempo de execução</p>
+<p class="fragment">Você pode enganar o compilador, mas não pode enganar a *runtime*.</p>
 
 
 groovy
@@ -287,31 +256,33 @@ def a = 4.6
 def b = "A string"
 print a / b
 ```
-Lançará uma exception em tempo de execução.
-
+<p class="fragment">Lançará uma exception em tempo de execução.</p>
+<p class="fragment">Você pode enganar o compilador, mas não pode enganar a *runtime*.</p>
 
 
 C
 ```c
 printf("%d\n", (4.6 / *((int*) "A string")));
 ```
-Irá efetuar a operação.
-
+<p class="fragment">Irá efetuar a operação.</p>
 
 
 Javascript
 ```javascript
 var x = 4.6 / "A string"
 ```
-Irá efetuar a operação. Não dará erro.
+<p class="fragment">Irá efetuar a operação. Não dará erro.</p>
 
 
 
 ### Duck Typing
 
-Em programação com linguagens orientadas a objetos, duck typing é um estilo de tipagem dinâmica na qual o conjunto atual de métodos e propriedades de um objeto determinam a semântica válida, ao invés de sua herança ou da implementação de uma interface específica. O nome do conceito refere-se ao teste do pato, atribuída a James Whitcomb Riley, que pode ser formulada como se segue:
-Quando eu vejo um pássaro que anda como um pato, nada como um pato e grasna como um pato, eu o chamo de pato. [Wikipedia](http://pt.wikipedia.org/wiki/Duck_typing)
 
+Em programação com linguagens orientadas a objetos, duck typing é um estilo de tipagem dinâmica na qual o conjunto atual de métodos e propriedades de um objeto determinam a semântica válida, ao invés de sua herança ou da implementação de uma interface específica.
+
+
+> "Quando eu vejo um pássaro que anda como um pato, nada como um pato e grasna como um pato, eu o chamo de pato."
+> (James Whitcomb Riley)
 
 
 ```groovy
@@ -322,12 +293,13 @@ def log(obj) {
 log("Nice stuff")
 log([1,2,3,4])
 log(["key": "value", "key2": "value2", "key3": "value4"])
-log("abcabdabeabf" =~ /ab[d|f]/​)​
+log("abcabdabeabf" =~ /ab[d|f]/)
 ```
 
 
 
-### Sobrecarga de Operadores
+### Operadores
+
 
 <table>
   <thead>
@@ -361,13 +333,7 @@ log("abcabdabeabf" =~ /ab[d|f]/​)​
 </table>
 
 
-
-```groovy
-def one = BigDecimal.ONE
-def ten = new BigDecimal("10")
-print ​one + ten​
-```
-
+É possível sobrecarregar os operadores
 
 
 ```groovy
@@ -381,6 +347,13 @@ class Dinheiro {
 def d1 = new Dinheiro(valor: 99.5)
 def d2 = new Dinheiro(valor: 0.5)
 println ​d1 + d2​
+```
+
+
+```groovy
+def one = BigDecimal.ONE
+def ten = new BigDecimal("10")
+print one + ten
 ```
 
 
@@ -403,7 +376,6 @@ class Cliente {
 def c = new Cliente(nome:"Arthur", nascimento: new Date())
 println "Olá " + c.nome
 ```
-
 
 
 Código Java equivalente
@@ -444,7 +416,6 @@ System.out.println("Olá " + c.getNome());
 ```
 
 
-
 Algumas regras dos GroovyBeans
 - Se não for declarado um modificador de acesso para classe, ela será considerada pública.
 - Se for declarado um modificador de acesso para um campo, será criado um campo com este modificador.
@@ -461,7 +432,6 @@ Existem várias anotações que ajudam a deixar o código mais limpo.
 - @groovy.beans.Bindable
 - @groovy.lang.Singleton
 Entre outras.
-
 
 
 Exemplo com anotações.
@@ -489,8 +459,6 @@ c1.nome = "Arthur"
 
 ### Closures
 Definição: É um bloco de código ou um ponteiro de método A Groovy Closure is like a "code block" or a method pointer.
-PS: Martin Fowler dá uma explicação mais detalhada neste [artigo]((http://martinfowler.com/bliki/Lambda.html)).
-
 
 
 Exemplo simples
@@ -501,13 +469,11 @@ clos.call()
 ```
 
 
-
 Exemplo com parâmetros
 ```groovy
 def soma = { a, b -> print a+b }
 soma(1, 2)
 ```
-
 
 
 Se houver apenas um parâmetro, pode-se usar a variável *it* sem o ->
@@ -517,14 +483,12 @@ oi("Theo")
 ```
 
 
-
 Pode-se passar uma closure como parâmetro de um método
 ```groovy
 5.times({ println it })​ //lembrando que parenteses sao opcionais
 
 [1,2,3].each { print it } //agora sem parenteses
 ```
-
 
 
 Suportam currying
@@ -552,7 +516,6 @@ def pessoa = "Theo"
 ```
 
 
-
 É possível declarar a String em múltiplas linhas
 ```groovy
 """select * 
@@ -560,7 +523,6 @@ from table
 where 1=1"""
 .eachLine{ println it }
 ```
-
 
 
 E manipular strings em groovy é bem mais atraente do que em Java
@@ -575,7 +537,6 @@ assert ["b", "b", "m", "p"].join() == "bbmp"
 
 assert "aa oa ds ao".grep{ it == ' '} == [' ', ' ', ' ']
 ```
-
 
 
 ### Coleções
@@ -598,7 +559,6 @@ assert [1, 3, 5] == ['a', 'few', 'words']*.size()​
 ```
 
 
-
 #### Mapas
 Também há literal para mapas (coleção para pares de chave/valor)
 
@@ -611,7 +571,6 @@ assert map.get("chave 1") == 1
 assert ["1": 2, "3": 4].class == null //null?
 assert ["1": 2, "3": 4].getClass() == java.util.LinkedHashMap.class​
 ```
-
 
 
 #### Ranges
@@ -639,7 +598,6 @@ println date
 ```
 
 
-
 #### Navegação segura
 ```groovy
 class Pessoa {
@@ -652,7 +610,6 @@ assert p?.pai?.pai == null
 ```
 
 
-
 #### Default Parameters
 ```groovy
 def ola(p = "Mundo") {
@@ -663,7 +620,6 @@ ola("Pessoas")
 ```
 
 
-
 #### Metaprogramação
 ```groovy
 class Pessoa {
@@ -672,9 +628,8 @@ class Pessoa {
 
 Pessoa.metaClass.printNome{ println nome }
 def p = new Pessoa(nome:"Arthur")
-p.printNome​()​
+p.printNome()
 ```
-
 
 
 ```groovy
@@ -692,3 +647,11 @@ p.hello()
 p.metaClass.idade = 3
 println p.idade​
 ```
+
+
+
+## Referências
+
+[Is your language strongly or weakly - Christopher Wong](http://chriswongdevblog.blogspot.com.br/2013/03/is-your-language-strongly-weakly.html)
+[Lambda]((http://martinfowler.com/bliki/Lambda.html)).
+[Wikipedia](http://pt.wikipedia.org/wiki/Duck_typing)
