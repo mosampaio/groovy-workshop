@@ -523,6 +523,8 @@ println triplo(3)
 
 
 ### Strings
+
+
 Podem ser do tipo String ou GString
 
 ```groovy
