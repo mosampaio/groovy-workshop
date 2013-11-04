@@ -726,13 +726,19 @@ ola("Pessoas")
 ```
 
 
+
 ##Bibliotecas e Frameworks
+
+
+[Grails](http://grails.org)
+<iframe src="//player.vimeo.com/video/8956337" width="500" height="281" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 
 + [Gradle](http://www.gradle.org) - Concorrente do Maven
 + [Ratpack](https://github.com/bleedingwolf/Ratpack) - Inspirado no Sinatra
-+ [Grails](http://grails.org) - Inspirado no Rails
 + [Gaelyk](http://gaelyk.appspot.com) - Framework pro Google App Engine
 + [Vert.x](http://vertx.io/) - Inspirado no Node.js
+
 
 
 
