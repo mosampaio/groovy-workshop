@@ -372,6 +372,8 @@ print one + ten
 
 
 ### GroovyBeans
+
+
 São JavaBeans, mas com a sintaxe mais simplificada.
 
 
@@ -470,7 +472,9 @@ c1.nome = "Arthur"
 
 
 ### Closures
-Definição: É um bloco de código ou um ponteiro de método A Groovy Closure is like a "code block" or a method pointer.
+
+
+Definição: É como um bloco de código ou um ponteiro de método
 
 
 Exemplo simples
