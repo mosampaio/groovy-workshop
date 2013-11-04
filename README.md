@@ -744,6 +744,13 @@ ola("Pessoas")
 
 ## Referências
 
-+ [Is your language strongly or weakly - Christopher Wong](http://chriswongdevblog.blogspot.com.br/2013/03/is-your-language-strongly-weakly.html)
-+ [Lambda]((http://martinfowler.com/bliki/Lambda.html)
-+ [Wikipedia](http://pt.wikipedia.org/wiki/Duck_typing)
++ [Is your language strongly or weakly - Chris Wong](http://chriswongdevblog.blogspot.com.br/2013/03/is-your-language-strongly-weakly.html)
++ [Lambda - Martin Fowler]((http://martinfowler.com/bliki/Lambda.html)
++ [Wikipedia - Wikipedia](http://pt.wikipedia.org/wiki/Duck_typing)
+ 
+
+
+
+# Obrigado
+
+[Curtiu? 'Star it'](https://github.com/mosampaio/groovy-workshop)
