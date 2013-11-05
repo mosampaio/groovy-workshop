@@ -790,7 +790,7 @@ assert "Marcos Sampaio" == p.nomeCompleto
 ## Referências
 
 + [Is your language strongly or weakly - Chris Wong](http://chriswongdevblog.blogspot.com.br/2013/03/is-your-language-strongly-weakly.html)
-+ [Lambda - Martin Fowler]((http://martinfowler.com/bliki/Lambda.html)
++ [Lambda - Martin Fowler](http://martinfowler.com/bliki/Lambda.html)
 + [Wikipedia - Wikipedia](http://pt.wikipedia.org/wiki/Duck_typing)
  
 
