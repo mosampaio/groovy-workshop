@@ -767,7 +767,7 @@ class PessoaMixin {
 
 Pessoa.mixin(PessoaMixin)
 def p = new Pessoa(nome: "Marcos", sobrenome: "Sampaio")
-assert "Marcos Sampaio" == p.nomeCompleto
+p.nomeCompleto
 ​```
 
 
